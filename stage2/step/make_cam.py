@@ -13,9 +13,9 @@ from misc import torchutils, imutils
 
 cudnn.enabled = True
 from PIL import Image
-                   
+
+
 def my_work(args):
-     
      maskroot=args.mask_root
      imname=os.listdir(maskroot)
      with torch.no_grad():
@@ -29,7 +29,7 @@ def my_work(args):
                 mask=torch.from_numpy(np.array(mask)).float()
                 mask2=torch.unsqueeze(mask,0)
                 mask2=torch.unsqueeze(mask2,0)
-                mask2 = mask2.cuda()
+                # mask2 = mask2.cuda()
                 strided_cams = F.upsample(mask2, strided_size,  mode='bilinear')
                 highres_cams = F.upsample(mask2, strided_up_size,  mode='bilinear')
                 strided_cams = strided_cams.squeeze(0)
@@ -38,9 +38,7 @@ def my_work(args):
                 # save cam
                 np.save(os.path.join(args.cam_out_dir, img_name[:-4] + '.npy'),
                         {"keys": valid_cat, "cam": strided_cams.cpu(), "high_res": highres_cams.cpu().numpy()})
-#
-#                if process_id == n_gpus - 1 and iter % (len(databin) // 20) == 0:
-#                    print("%d " % ((5 * iter + 1) // (len(databin) // 20)), end='')
+
 
 def run(args):
     print('CAMs starting')

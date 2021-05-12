@@ -1,0 +1,9 @@
+.idea/
+stage2/misc/__pycache__/
+stage2/net/__pycache__/
+stage2/step/__pycache__/
+stage2/voc12/__pycache__/
+
+stage2/sess/
+stage2/out/CoCA/
+stage2/sample_train_eval.log

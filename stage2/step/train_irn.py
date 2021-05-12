@@ -35,7 +35,7 @@ def run(args):
         {'params': param_groups[1], 'lr': 10*args.irn_learning_rate, 'weight_decay': args.irn_weight_decay}
     ], lr=args.irn_learning_rate, weight_decay=args.irn_weight_decay, max_step=max_step)
 
-    model = torch.nn.DataParallel(model).cuda()
+    model = torch.nn.DataParallel(model)   # .cuda()
     model.train()
 
     avg_meter = pyutils.AverageMeter()
